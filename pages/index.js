@@ -1,11 +1,11 @@
-import * as React from "react";
-import Head from "next/head"
-import { Container, Typography, Box, Grid, Button } from "@mui/material";
-import AppBar from "../components/AppBar";
-import Copyright from "../src/Copyright";
-import parse from "html-react-parser";
-import Parser from "rss-parser";
-import Moment from "react-moment";
+import * as React from 'react'
+import Head from 'next/head'
+import Image from 'next/image'
+import { Container, Typography, Box, Grid, Button } from '@mui/material'
+import AppBar from '../components/AppBar'
+import Episode from '../components/Episode'
+import Footer from '../components/Footer'
+import Parser from 'rss-parser'
 
 export default function Index({ feed, name }) {
   const [showNumber, setShowNumber] = React.useState(6);
@@ -21,31 +21,46 @@ export default function Index({ feed, name }) {
       </Head>
       <AppBar name={name} />
       <Container maxWidth="xl">
-        <Box sx={{ my: 4 }}>
-          <Typography variant="h4" component="h1" gutterBottom>
-            {name}
-          </Typography>
-          <Grid container spacing={2}>
-            {feed.items.filter((item, index) => ((index < showNumber) ? true : false)).map((item) => (
-              <Grid item xs={12} sm={6} lg={4} key={item.link}>
-                <img
-                  src={item.image[0]["$"].href}
-                  alt={item.title}
-                  loading="lazy"
-                  width="100%"
-                  height="auto"
-                />
-                <h2>{item.title}</h2>
-                <p><Moment date={item.isoDate} format="DD.MM.YYYY" /> &bull; Tuotantokausi {item.season} &bull; Jakso {item.episode}</p>
-              </Grid>
+        <Box sx={{ mt: 8, mb: 4 }}>
+
+          <Grid container alignItems="center" spacing={4} sx={{mb: 4}}>
+            <Grid item xs={12} sm={6} lg={8}>
+              <Typography variant="h2" component="h1" gutterBottom>
+                {feed.title}
+              </Typography>
+              <Typography fontSize={22} sx={{ mr: 24, mb: 8 }}>
+                {feed.description}
+              </Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} lg={4}>
+              <Image
+                src={feed.image.url}
+                alt={feed.title}
+                height={1246}
+                width={1246}
+              />
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={4}>
+            {feed.items
+              .filter((item, index) => (index < showNumber ? true : false))
+              .map((item) => (
+                <Episode item={item} key={item.link} />
             ))}
           </Grid>
 
-          {(showNumber < feed.items.length) ?
-            <Button variant="contained" onClick={increaseShowNumber}>Lataa lisää</Button>  : ''
-          }
-          
-          <Copyright />
+          {showNumber < feed.items.length ? (
+            <Box align="center" sx={{mt: 8}}>
+              <Button variant="contained" onClick={increaseShowNumber}>
+                Lataa lisää
+              </Button>
+            </Box>
+          ) : (
+            ""
+          )}
+
+          <Footer name={name} />
         </Box>
       </Container>
     </>
@@ -71,13 +86,13 @@ async function getFeed(feedUrl) {
 }
 
 export async function getStaticProps() {
-  const feedName = process.env.PODCAST_NAME
+  const feedName = process.env.PODCAST_NAME;
   const detailedFeed = await getFeed(process.env.PODCAST_RSS_URL);
 
   return {
     props: {
       feed: detailedFeed,
-      name: feedName
+      name: feedName,
     },
     revalidate: 60,
   };
