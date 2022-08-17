@@ -1,12 +1,13 @@
-import * as React from 'react'
-import Image from 'next/image'
-import { Grid, Typography } from '@mui/material'
-import parse from 'html-react-parser'
-import Moment from 'react-moment'
+import * as React from "react";
+import Image from "next/image";
+import { Grid, Typography } from "@mui/material";
+import parse from "html-react-parser";
+import Moment from "react-moment";
 
-export default function Episode({ item }) {
+export default function Episode({ item, key }) {
+  console.log(item.enclosure)
   return (
-    <Grid item xs={12} sm={6} lg={4}>
+    <Grid item xs={12} sm={6} lg={4} key={key}>
       <Image
         src={item.image[0]["$"].href}
         alt={item.title}
@@ -18,6 +19,13 @@ export default function Episode({ item }) {
         <Moment date={item.isoDate} format="DD.MM.YYYY" /> &bull; Tuotantokausi{" "}
         {item.season} &bull; Jakso {item.episode}
       </Typography>
+      <audio controls>
+        <source
+          src={item?.enclosure?.url}
+          type={item?.enclosure?.type}
+        />
+        {"Your browser does not support the audio element."}
+      </audio>
     </Grid>
   );
 }

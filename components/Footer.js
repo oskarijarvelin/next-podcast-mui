@@ -1,12 +1,18 @@
-import * as React from 'react'
-import { Typography } from '@mui/material'
+import * as React from "react";
+import { Typography } from "@mui/material";
 
-export default function Copyright({ name }) {
+export default function Copyright({ copyright, year }) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" marginTop={8}>
-      {'Copyright © '}
-      {new Date().getFullYear()}{': '}
-      {name}
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      marginTop={8}
+    >
+      {"Copyright © "}
+      {year}
+      {": "}
+      {copyright}
     </Typography>
   );
 }
