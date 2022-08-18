@@ -11,7 +11,6 @@ import {
   Button,
   Drawer,
 } from "@mui/material";
-import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { SiAnchor } from "react-icons/si";
 import { FaArrowLeft, FaPlay } from "react-icons/fa";
 import Link from "../../src/Link";
