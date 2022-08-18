@@ -58,9 +58,7 @@ export default function Index({ feed, year }) {
 
               <Box sx={{ py: 2 }}>
                 <Stack spacing={2} direction="row">
-                <Link
-                    href='/'
-                  >
+                  <Link href="/">
                     <Button
                       variant="contained"
                       color="error"

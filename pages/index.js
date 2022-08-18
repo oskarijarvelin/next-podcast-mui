@@ -32,21 +32,21 @@ export default function Index({ feed, year }) {
 
   function playPreviousTrack() {
     let trackIndex = feed?.items.indexOf(track);
-    let prevIndex = ( trackIndex === 0 ) ? feed?.items.length - 1 : trackIndex - 1;
+    let prevIndex = trackIndex === 0 ? feed?.items.length - 1 : trackIndex - 1;
     setTrack(feed?.items[prevIndex]);
-  };
+  }
 
   function playNextTrack() {
     let trackIndex = feed?.items.indexOf(track);
-    let nextIndex = ( trackIndex === feed?.items.length - 1 ) ? 0 : trackIndex + 1;
+    let nextIndex = trackIndex === feed?.items.length - 1 ? 0 : trackIndex + 1;
     setTrack(feed?.items[nextIndex]);
-  };
+  }
 
   function playThisTrack(t) {
     showPlayer(true);
     setTrack(t);
     toggleDrawer();
-  };
+  }
 
   function increaseShowNumber() {
     setShowNumber(showNumber + 6);
@@ -205,9 +205,7 @@ export default function Index({ feed, year }) {
                   color="success"
                   sx={{ pt: 1 }}
                   startIcon={<FaPlay />}
-                  onClick={() =>
-                    playThisTrack(currentEpisode)
-                  }
+                  onClick={() => playThisTrack(currentEpisode)}
                 >
                   {"Kuuntele"}
                 </Button>
