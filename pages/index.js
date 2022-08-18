@@ -1,6 +1,7 @@
 import * as React from "react";
 import Head from "next/head";
 import Image from "next/image";
+import { useRouter } from 'next/router'
 import {
   Container,
   Typography,
@@ -26,6 +27,11 @@ export default function Index({ feed, year }) {
   const [currentEpisode, selectEpisode] = React.useState(feed?.items[0]);
   const [track, setTrack] = React.useState(feed?.items[0]);
   const [player, showPlayer] = React.useState(false);
+
+  const router = useRouter()
+  const route = router.query
+
+  console.log(route)
 
   let category = feed?.category[0]["$"].text;
   let subcategory = feed?.category[0]["itunes:category"][0]["$"].text;
@@ -202,6 +208,7 @@ export default function Index({ feed, year }) {
               <Stack spacing={2} direction="row">
                 <Button
                   variant="contained"
+                  color="success"
                   sx={{ pt: 1 }}
                   startIcon={<FaPlay />}
                   onClick={() =>
