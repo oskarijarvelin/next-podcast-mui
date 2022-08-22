@@ -2,15 +2,7 @@ import * as React from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import {
-  Container,
-  Typography,
-  Box,
-  Grid,
-  Stack,
-  Button,
-  Drawer,
-} from "@mui/material";
+import { Container, Typography, Box, Grid, Stack, Button } from "@mui/material";
 import { SiAnchor } from "react-icons/si";
 import { FaArrowLeft, FaPlay } from "react-icons/fa";
 import Link from "../../src/Link";
@@ -21,7 +13,6 @@ import parse from "html-react-parser";
 import AudioPlayer from "react-h5-audio-player";
 
 export default function Index({ feed, year }) {
-  const [currentEpisode, selectEpisode] = React.useState(feed?.items[0]);
   const [track, setTrack] = React.useState(feed?.items[0]);
   const [player, showPlayer] = React.useState(false);
 
@@ -38,9 +29,7 @@ export default function Index({ feed, year }) {
   return (
     <>
       <Head>
-        <title>
-          {feed?.items[itemIndex].title} - {feed?.title}
-        </title>
+        <title>{feed?.items[itemIndex]?.title + " - " + feed?.title}</title>
       </Head>
 
       <Container maxWidth="xl">
@@ -58,7 +47,7 @@ export default function Index({ feed, year }) {
 
               <Box sx={{ py: 2 }}>
                 <Stack spacing={2} direction="row">
-                  <Link href="/">
+                  <Link href="/" style={{ textDecoration: "none" }}>
                     <Button
                       variant="contained"
                       color="error"
@@ -73,14 +62,15 @@ export default function Index({ feed, year }) {
                     color="success"
                     sx={{ pt: 1 }}
                     startIcon={<FaPlay />}
-                    onClick={() => playThisTrack(currentEpisode)}
+                    onClick={() => playThisTrack(feed?.items[itemIndex])}
                   >
                     {"Kuuntele"}
                   </Button>
                   <Link
-                    href={currentEpisode?.link}
+                    href={feed?.items[itemIndex]?.link}
                     target="_blank"
                     rel="noopener"
+                    style={{ textDecoration: "none" }}
                   >
                     <Button
                       variant="contained"
@@ -94,7 +84,7 @@ export default function Index({ feed, year }) {
               </Box>
 
               {feed?.items[itemIndex]?.content ? (
-                <Typography fontSize={22} sx={{ mb: 4 }}>
+                <Typography variant="div" fontSize={22} sx={{ mb: 4 }}>
                   {parse(feed?.items[itemIndex]?.content)}
                 </Typography>
               ) : (
@@ -155,10 +145,10 @@ export default function Index({ feed, year }) {
       <AudioPlayer
         style={
           player
-            ? { position: "fixed", left: "0", bottom: "0" }
-            : { position: "fixed", left: "0", bottom: "-120px" }
+            ? { position: "fixed", left: "0", bottom: "0", zIndex: 9999 }
+            : { position: "fixed", left: "0", bottom: "-120px", zIndex: 9999 }
         }
-        src={player ? track?.enclosure?.url : false}
+        src={player ? track?.enclosure?.url : "false"}
         showSkipControls={false}
         showJumpControls={false}
         showFilledVolume={true}

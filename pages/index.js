@@ -45,7 +45,6 @@ export default function Index({ feed, year }) {
   function playThisTrack(t) {
     showPlayer(true);
     setTrack(t);
-    toggleDrawer();
   }
 
   function increaseShowNumber() {
@@ -231,10 +230,10 @@ export default function Index({ feed, year }) {
       <AudioPlayer
         style={
           player
-            ? { position: "fixed", left: "0", bottom: "0" }
-            : { position: "fixed", left: "0", bottom: "-120px" }
+            ? { position: "fixed", left: "0", bottom: "0", zIndex: 9999 }
+            : { position: "fixed", left: "0", bottom: "-120px", zIndex: 9999 }
         }
-        src={player ? track?.enclosure?.url : false}
+        src={player ? track?.enclosure?.url : "false"}
         showSkipControls={true}
         showJumpControls={false}
         showFilledVolume={true}
