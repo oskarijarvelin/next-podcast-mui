@@ -185,7 +185,7 @@ export default function Index({ feed, year }) {
         </Box>
       </Container>
 
-      <SwipeableDrawer anchor="right" open={showDrawer} onClose={toggleDrawer}>
+      <SwipeableDrawer anchor="right" open={showDrawer} onOpen={toggleDrawer} onClose={toggleDrawer}>
         <Box width={440} maxWidth="90vw">
           <Image
             src={currentEpisode?.image[0]["$"].href}
