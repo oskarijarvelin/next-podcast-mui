@@ -11,11 +11,10 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-          />
+          <link rel="icon" href="/img/favicon-32.png" sizes="32x32" />
+          <link rel="icon" href="/img/favicon-128.png" sizes="128x128" />
+          <link rel="icon" href="/img/favicon-180.png" sizes="180x180" />
+          <link rel="icon" href="/img/favicon-192.png" sizes="192x192" />
           <meta name="emotion-insertion-point" content="" />
           {this.props.emotionStyleTags}
         </Head>

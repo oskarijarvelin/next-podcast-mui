@@ -60,10 +60,18 @@ export default function Index({ feed, year }) {
     toggleDrawer();
   }
 
+  function createMetaDescription(string) {
+    string = string.replace(/(?:https?|ftp):\/\/[\S]+/g, '[linkki]').replace(/(?:\r\n|\r|\n)/g, ' ');
+    string = string.substr(0, 160);
+    string = string.substr(0, Math.min(string.length, string.lastIndexOf(" ")))
+    return string;
+  }
+
   return (
     <>
       <Head>
         <title>{feed?.title}</title>
+        <meta name="description" content={createMetaDescription(feed?.description)}></meta>
       </Head>
 
       <Container maxWidth="xl">
@@ -92,7 +100,7 @@ export default function Index({ feed, year }) {
               )}
 
               {feed?.author ? (
-                <Typography variant="h6" color="text.secondary" sx={{ mb: 0 }}>
+                <Typography variant="h6" component="p" color="grey.600" sx={{ mb: 0 }}>
                   {"Julkaisija: "}
                   <Typography variant="span" sx={{ fontWeight: "bold" }}>
                     {feed?.author}
@@ -103,7 +111,7 @@ export default function Index({ feed, year }) {
               )}
 
               {category || subcategory ? (
-                <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+                <Typography variant="h6" component="p" color="grey.600" sx={{ mb: 4 }}>
                   {"Kategoria: "}
                   <Typography variant="span" sx={{ fontWeight: "bold" }}>
                     {category}

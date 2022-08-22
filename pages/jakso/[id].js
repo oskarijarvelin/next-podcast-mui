@@ -26,10 +26,18 @@ export default function Index({ feed, year }) {
     setTrack(t);
   }
 
+  function createMetaDescription(string) {
+    string = string.replace(/(?:https?|ftp):\/\/[\S]+/g, '[linkki]').replace(/(?:\r\n|\r|\n)/g, ' ');
+    string = string.substr(0, 160);
+    string = string.substr(0, Math.min(string.length, string.lastIndexOf(" ")))
+    return string;
+  }
+
   return (
     <>
       <Head>
         <title>{feed?.items[itemIndex]?.title + " - " + feed?.title}</title>
+        <meta name="description" content={createMetaDescription(feed?.items[itemIndex]?.contentSnippet)}></meta>
       </Head>
 
       <Container maxWidth="xl">
@@ -92,7 +100,7 @@ export default function Index({ feed, year }) {
               )}
 
               {feed?.items[itemIndex]?.isoDate ? (
-                <Typography variant="h6" color="text.secondary" sx={{ mb: 0 }}>
+                <Typography variant="h6" color="grey.600" sx={{ mb: 0 }}>
                   {"Julkaistu: "}
                   <Typography variant="span" sx={{ fontWeight: "bold" }}>
                     <Moment
@@ -106,7 +114,7 @@ export default function Index({ feed, year }) {
               )}
 
               {feed?.items[itemIndex]?.season ? (
-                <Typography variant="h6" color="text.secondary" sx={{ mb: 0 }}>
+                <Typography variant="h6" color="grey.600" sx={{ mb: 0 }}>
                   {"Tuotantokausi: "}
                   <Typography variant="span" sx={{ fontWeight: "bold" }}>
                     {feed?.items[itemIndex]?.season}
@@ -117,7 +125,7 @@ export default function Index({ feed, year }) {
               )}
 
               {feed?.items[itemIndex]?.episode ? (
-                <Typography variant="h6" color="text.secondary" sx={{ mb: 4 }}>
+                <Typography variant="h6" color="grey.600" sx={{ mb: 4 }}>
                   {"Jakso: "}
                   <Typography variant="span" sx={{ fontWeight: "bold" }}>
                     {feed?.items[itemIndex]?.season}
