@@ -8,7 +8,7 @@ import {
   Grid,
   Stack,
   Button,
-  Drawer,
+  SwipeableDrawer,
 } from "@mui/material";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { SiAnchor } from "react-icons/si";
@@ -185,7 +185,7 @@ export default function Index({ feed, year }) {
         </Box>
       </Container>
 
-      <Drawer anchor="right" open={showDrawer} onClose={toggleDrawer}>
+      <SwipeableDrawer anchor="right" open={showDrawer} onClose={toggleDrawer}>
         <Box width={440} maxWidth="90vw">
           <Image
             src={currentEpisode?.image[0]["$"].href}
@@ -233,7 +233,7 @@ export default function Index({ feed, year }) {
             </Box>
           </Box>
         </Box>
-      </Drawer>
+      </SwipeableDrawer>
 
       <AudioPlayer
         style={
