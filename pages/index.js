@@ -129,7 +129,7 @@ export default function Index({ feed, year }) {
                 ""
               )}
             </Grid>
-            <Grid item display="flex" xs={12} sm={6} lg={4}>
+            <Grid item display="flex" xs={12} sm={6} lg={4} bgcolor="gray.300">
               <Image
                 src={feed?.image.url}
                 alt={feed?.title}
@@ -202,9 +202,6 @@ export default function Index({ feed, year }) {
               &bull; Tuotantokausi {currentEpisode?.season} &bull; Jakso{" "}
               {currentEpisode?.episode}
             </Typography>
-            <Box sx={{ wordBreak: "break-word" }}>
-              {parse(currentEpisode?.content)}
-            </Box>
             <Box sx={{ pt: 2 }}>
               <Stack spacing={2} direction="row">
                 <Button
@@ -230,6 +227,9 @@ export default function Index({ feed, year }) {
                   </Button>
                 </Link>
               </Stack>
+            </Box>
+            <Box sx={{ wordBreak: "break-word" }}>
+              {parse(currentEpisode?.content)}
             </Box>
           </Box>
         </Box>
